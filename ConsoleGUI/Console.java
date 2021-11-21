@@ -63,8 +63,28 @@ public class Console {
 		}
 		
 	}
+	
 	/**
 	* Returns the next line that the user types and enters (waits until user has entered in a response).
+	*/
+	public String input() {
+		this.GUI.setAskedForInput(true);
+		this.cont=false;
+		while(!cont) {
+			// this timer is needed, as otherwise when the other thread tries to write to cont, this one will be reading from it
+			try {
+				TimeUnit.MILLISECONDS.sleep(100);
+			}	
+			catch (Exception e) {
+			}
+		}
+		this.GUI.setAskedForInput(false);
+		return returnStr;
+		
+	}
+	
+	/**
+	* Prints a prompt and returns the next line that the user types and enters (waits until user has entered in a response).
 	* @param  prompt  The text used to prompt the user for input.
 	*/
 	public String input(String prompt) {

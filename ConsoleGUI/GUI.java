@@ -18,6 +18,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormAttachment;
 //import org.eclipse.wb.swt.SWTResourceManager;
 
 
@@ -82,6 +85,7 @@ class GUI extends Thread{
 		shell.layout();
 		
 		while (!shell.isDisposed()) {
+			// this runs if the main thread needs an input prompt printed
 			if (this.console.getWaitingOnInput()) {
 				this.println(this.console.getInputPrompt());
 				this.console.setWaitingOnInput(false);
@@ -89,6 +93,7 @@ class GUI extends Thread{
 			if (setContTrue)
 			{
 				this.console.setCont(true);
+				this.setContTrue=false;
 			}
 			if (this.console.getWaitingOnPrint()) {
 				println(this.console.getPrintString());
@@ -108,8 +113,14 @@ class GUI extends Thread{
 		this.shell = new Shell();
 		this.shell.setSize(450, 300);
 		this.shell.setText(this.windowName);
-		this.shell.setLayout(new FillLayout(SWT.VERTICAL));
+		shell.setLayout(new FormLayout());
 		this.textboxInput = new Text(shell, SWT.BORDER);
+		FormData fd_textboxInput = new FormData();
+		fd_textboxInput.left = new FormAttachment(0);
+		fd_textboxInput.right = new FormAttachment(100);
+		fd_textboxInput.top = new FormAttachment(0, 10);
+		fd_textboxInput.bottom = new FormAttachment(0, 37);
+		textboxInput.setLayoutData(fd_textboxInput);
 		textboxInput.setFont(SWTResourceManager.getFont("Segoe UI", this.fontSize, SWT.NORMAL));
 		this.textboxInput.setText("");
 		// this following runs the "runs" block when enter is pressed if the textbox is selected
@@ -130,6 +141,12 @@ class GUI extends Thread{
 			}
 		});
 		this.textboxOutput = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL);
+		FormData fd_textboxOutput = new FormData();
+		fd_textboxOutput.bottom = new FormAttachment(100);
+		fd_textboxOutput.right = new FormAttachment(100);
+		fd_textboxOutput.top = new FormAttachment(textboxInput, 6);
+		fd_textboxOutput.left = new FormAttachment(0);
+		textboxOutput.setLayoutData(fd_textboxOutput);
 		textboxOutput.setFont(SWTResourceManager.getFont("Segoe UI", this.fontSize, SWT.NORMAL));
 		this.textboxOutput.setEditable(false);
 		this.textboxOutput.setText("");
