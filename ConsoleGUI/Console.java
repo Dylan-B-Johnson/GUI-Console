@@ -3,10 +3,14 @@ package ConsoleGUI;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A class that creates a console window with an input and output box.
+ * Includes methods for receiving input from the input box and outputting to the output box.
+ */
 public class Console {
 	private GUI GUI;
-	private boolean waitingOnInput, cont, waitingOnPrint;
-	private String inputPrompt, returnStr, printString;
+	private boolean waitingOnInput, cont, waitingOnPrint, setIcon, setWindowName;
+	private String inputPrompt, returnStr, printString, imagePath;
 	
 	/**
 	* Constructs a console window with an input box and output box.
@@ -66,6 +70,7 @@ public class Console {
 	
 	/**
 	* Returns the next line that the user types and enters (waits until user has entered in a response).
+	* @return The next line that the user enters.
 	*/
 	public String input() {
 		this.GUI.setAskedForInput(true);
@@ -86,6 +91,7 @@ public class Console {
 	/**
 	* Prints a prompt and returns the next line that the user types and enters (waits until user has entered in a response).
 	* @param  prompt  The text used to prompt the user for input.
+	* @return The next line that the user enters.
 	*/
 	public String input(String prompt) {
 		this.GUI.setAskedForInput(true);
@@ -103,6 +109,24 @@ public class Console {
 		this.GUI.setAskedForInput(false);
 		return returnStr;
 		
+	}
+	
+	/**
+	* Sets the console window icon to the .ico file at the given path.
+	* @param  imagePath  The absolute path (and filename with extension) to the .ico file. On Windows you need to use two \\ instead of \, since \ is the escape character.
+	*/
+	public void setImage(String imagePath) {
+		this.imagePath=imagePath;
+		this.setIcon=true;
+	}
+	
+	/**
+	* Sets the console window's name to a given string.
+	* @param  windowName  The title of the console window.
+	*/
+	public void setWindowName(String windowName) {
+		this.GUI.setWindowName(windowName);
+		this.setWindowName=true;
 	}
 	
 	String getPrintString() {
@@ -137,6 +161,25 @@ public class Console {
 	void setCont(boolean cont) {
 		this.cont=cont;
 	}
-
+	
+	void setSetIcon(boolean setIcon) {
+		this.setIcon=setIcon;
+	}
+	
+	boolean getSetIcon() {
+		return this.setIcon;
+	}
+	
+	String getImagePath() {
+		return this.imagePath;
+	}
+	
+	boolean getSetWindowName() {
+		return this.setWindowName;
+	}
+	
+	void setSetWindowName(boolean setWindowName) {
+		this.setWindowName=setWindowName;
+	}
 
 }

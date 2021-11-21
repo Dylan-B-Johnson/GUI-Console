@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import swing2swt.layout.BoxLayout;
 import org.eclipse.swt.widgets.Text;
-
+import org.eclipse.swt.graphics.Image;
 import javax.swing.JOptionPane;
 
 import org.eclipse.swt.SWT;
@@ -21,7 +21,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
-//import org.eclipse.wb.swt.SWTResourceManager;
 
 
 class GUI extends Thread{
@@ -42,10 +41,7 @@ class GUI extends Thread{
 	public GUI(Console console, String windowName, int fontSize) {
 		this.console=console;
 		this.fontSize=fontSize;
-		if (windowName!=null)
-			this.windowName=windowName;
-		else
-			this.windowName="Console";
+		this.setWindowName(windowName);
 	}
 	
 	public GUI(Console console, int fontSize) {
@@ -57,10 +53,7 @@ class GUI extends Thread{
 	public GUI(Console console, String windowName) {
 		this.console=console;
 		this.fontSize=9;
-		if (windowName!=null)
-			this.windowName=windowName;
-		else
-			this.windowName="Console";
+		this.setWindowName(windowName);
 	}
 	
 	/**
@@ -80,7 +73,7 @@ class GUI extends Thread{
 	 */
 	public void open() {
 		Display display = Display.getDefault();
-		createContents();
+		createContents(display);
 		shell.open();
 		shell.layout();
 		
@@ -102,6 +95,14 @@ class GUI extends Thread{
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
+			if (this.console.getSetWindowName()) {
+				this.shell.setText(this.windowName);
+				this.console.setSetWindowName(false);
+			}
+			if (this.console.getSetIcon()) {
+				this.shell.setImage(new Image(display, this.console.getImagePath()));
+				this.console.setSetIcon(false);
+			}
 		}
 	}
 
@@ -109,7 +110,7 @@ class GUI extends Thread{
 	 * Create contents of the window.
 	 * @wbp.parser.entryPoint
 	 */
-	protected void createContents() {
+	protected void createContents(Display display) {
 		this.shell = new Shell();
 		this.shell.setSize(450, 300);
 		this.shell.setText(this.windowName);
@@ -186,6 +187,13 @@ class GUI extends Thread{
 	
 	public void setAskedForInput(boolean askedForInput) {
 		this.askedForInput=askedForInput;
+	}
+	
+	public void setWindowName(String windowName) {
+		if (windowName!=null)
+			this.windowName=windowName;
+		else
+			this.windowName="Console";
 	}
 
 }
