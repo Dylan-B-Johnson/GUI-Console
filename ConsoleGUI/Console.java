@@ -9,7 +9,7 @@ public class Console {
 	private String inputPrompt, returnStr, printString;
 	
 	/**
-	* Constructs a console windows with an input box and output box.
+	* Constructs a console window with an input box and output box.
 	*/
 	public Console() {
 		this.GUI = new GUI(this);
@@ -18,7 +18,7 @@ public class Console {
 	}
 	
 	/**
-	* Constructs a console windows with an input box and output box.
+	* Constructs a console window with an input box and output box.
 	* @param windowName The name of the console window.
 	*/
 	public Console(String windowName) {
@@ -27,7 +27,7 @@ public class Console {
 	}
 	
 	/**
-	* Constructs a console windows with an input box and output box.
+	* Constructs a console window with an input box and output box.
 	* @param windowName The name of the console window.
 	* @param fontsize The font size for the text in the window.
 	*/
@@ -37,7 +37,7 @@ public class Console {
 	}
 	
 	/**
-	* Constructs a console windows with an input box and output box.
+	* Constructs a console window with an input box and output box.
 	* @param fontsize The font size for the text in the window.
 	*/
 	public Console(int fontsize) {
