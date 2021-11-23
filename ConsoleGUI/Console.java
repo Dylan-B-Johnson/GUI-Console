@@ -60,6 +60,7 @@ public class Console {
 		else
 			this.printString="";
 		waitingOnPrint=true;
+		// just giving the GUI thread a moment to print before we continue
 		try {
 			TimeUnit.MILLISECONDS.sleep(010);
 		}	
@@ -78,7 +79,7 @@ public class Console {
 		while(!cont) {
 			// this timer is needed, as otherwise when the other thread tries to write to cont, this one will be reading from it
 			try {
-				TimeUnit.MILLISECONDS.sleep(100);
+				TimeUnit.MILLISECONDS.sleep(010);
 			}	
 			catch (Exception e) {
 			}
@@ -101,7 +102,7 @@ public class Console {
 		while(!cont) {
 			// this timer is needed, as otherwise when the other thread tries to write to cont, this one will be reading from it
 			try {
-				TimeUnit.MILLISECONDS.sleep(100);
+				TimeUnit.MILLISECONDS.sleep(010);
 			}	
 			catch (Exception e) {
 			}
