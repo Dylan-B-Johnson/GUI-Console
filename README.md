@@ -6,7 +6,7 @@ A simple package that allows for the creation of command-line Java apps that run
 Here is an example console window. The following code (and the user's entering of "response") produced this output:
 ```
 Console console = new Console();
-console.input("<prompt>");
-console.input("<prompt2>");
+console.input("<<prompt>>");
+console.input("<<prompt2>>");
 ```
 This package uses multithreading to ensure that the GUI is responsive, while the thread that calls an input method waits for the user's input to be returned.
